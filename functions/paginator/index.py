@@ -1,21 +1,40 @@
-import random
+from appwrite.client import Client
+
+from appwrite.services.account import Account
+from appwrite.services.avatars import Avatars
+from appwrite.services.databases import Databases
+from appwrite.services.functions import Functions
+from appwrite.services.health import Health
+from appwrite.services.locale import Locale
+from appwrite.services.storage import Storage
+from appwrite.services.teams import Teams
+from appwrite.services.users import Users
 
 def main(req, res):
-  payload = req.payload or 'No payload provided. Add custom data when executing function.'
+  client = Client()
 
-  secretKey = req.variables.get(
-    'SECRET_KEY',
-    'SECRET_KEY variable not found. You can set it in Function settings.'
-  )
+  # You can remove services you don't use
+  account = Account(client)
+  avatars = Avatars(client)
+  database = Databases(client)
+  functions = Functions(client)
+  health = Health(client)
+  locale = Locale(client)
+  storage = Storage(client)
+  teams = Teams(client)
+  users = Users(client)
 
-  randomNumber = random.random()
-
-  trigger = req.variables['APPWRITE_FUNCTION_TRIGGER']
-
+  if not req.variables.get('APPWRITE_FUNCTION_ENDPOINT') or not req.variables.get('APPWRITE_FUNCTION_API_KEY'):
+    print('Environment variables are not set. Function cannot use Appwrite SDK.')
+  else:
+    (
+    client
+      .set_endpoint(req.variables.get('APPWRITE_FUNCTION_ENDPOINT', None))
+      .set_project(req.variables.get('APPWRITE_FUNCTION_PROJECT_ID', None))
+      .set_key(req.variables.get('APPWRITE_FUNCTION_API_KEY', None))
+      .set_self_signed(True)
+    )
+  
   return res.json({
-    'message': 'Hello from Appwrite!',
-    'payload': payload,
-    'secretKey': secretKey,
-    'randomNumber': randomNumber,
-    'trigger': trigger,
+    "areDevelopersAwesome": True,
   })
