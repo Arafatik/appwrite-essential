@@ -1,0 +1,55 @@
+{
+    "projectId": "64e9c63f4d210679b0b9",
+    "projectName": "Test_Project",
+    "databases": [
+        {
+            "$id": "64e9c9d13de7ab9990e4",
+            "name": "DATABASE",
+            "$createdAt": "2023-08-26T09:45:53.254+00:00",
+            "$updatedAt": "2023-08-26T09:45:53.254+00:00"
+        }
+    ],
+    "collections": [
+        {
+            "$id": "64e9c9dd4ca2b1cccc26",
+            "$permissions": [
+                "create(\"any\")",
+                "read(\"any\")",
+                "update(\"any\")",
+                "delete(\"any\")"
+            ],
+            "databaseId": "64e9c9d13de7ab9990e4",
+            "name": "USERS",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "email",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 256,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        }
+    ],
+    "functions": [
+        {
+            "$id": "64e9cd0497e2f9810861",
+            "name": "paginator",
+            "runtime": "python-3.9",
+            "path": "functions/paginator",
+            "entrypoint": "src/index.py",
+            "ignore": [
+                "__pypackages__"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
+        }
+    ]
+}
