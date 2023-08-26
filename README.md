@@ -14,6 +14,7 @@
 
 ```bat
 .\scripts\push
+.\tools\deploy-paginator
 ```
 
 Создать новую appwrite функцию
